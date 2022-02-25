@@ -31,7 +31,17 @@ public class PlayerController : MonoBehaviour
         // 키보드 : 'D', -> : 양의 방향 : +1.0f
         float zInput = Input.GetAxis("Vertical");
         // 키보드 : 'W',^ :양의 방향 : +1.0f
-       
+
+        // 실제 이동 속도를 입력값과 이동 속력을 사용해 결정
+        float xSpeed = xInput * speed;
+        float zSpeed = zInput * speed;
+
+        // Vecxtor3 속도를 (xSpeed, 0f. zSpeed) 생성
+        Vector3 newVelocity = new Vector3(xSpeed, 0, zSpeed);
+        //리지드바디의 속도에 newVelocity 할당
+        playerRigidbody.velocity = newVelocity;
+
+
     }
 
     void DirectInput()
@@ -59,10 +69,10 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(-speed, 0f, 0f);
         }
     }
-void Die()
-    {
+       public void Die()
+       { 
         my.SetActive(false);
         //gameObject.SetActive(false);
         // ㄴ 이렇게 소문자로 (변수) 하면 유니티가 자동으로 해줌
-    }
+       }
 }
